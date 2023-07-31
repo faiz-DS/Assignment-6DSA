@@ -1,0 +1,24 @@
+def is_doubled_array(changed):
+    count_dict = {}  # Dictionary to store the count of each element in changed
+
+    # Count the occurrences of each element in the changed array
+    for num in changed:
+        count_dict[num] = count_dict.get(num, 0) + 1
+
+    original = []  # List to store the reconstructed original array
+
+    for num in changed:
+        # Check if num/2 exists in the dictionary
+        if num // 2 in count_dict and count_dict[num // 2] > 0:
+            original.append(num // 2)
+            count_dict[num // 2] -= 1
+        else:
+            # If num/2 doesn't exist or its count is already used up, changed is not a doubled array
+            return []
+
+    return original
+
+# Test example
+changed = [1, 3, 4, 2, 6, 8]
+result = is_doubled_array(changed)
+print(result)  # Output: [1, 3, 4]

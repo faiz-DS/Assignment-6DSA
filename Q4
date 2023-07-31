@@ -1,0 +1,21 @@
+def find_max_length(nums):
+    n = len(nums)
+    max_length = 0
+    sum_map = {0: -1}  # Initialize a dictionary to store running sum and its first occurrence index
+
+    running_sum = 0
+    for i in range(n):
+        # Treat 0 as -1 and 1 as +1
+        running_sum += 1 if nums[i] == 1 else -1
+
+        if running_sum in sum_map:
+            max_length = max(max_length, i - sum_map[running_sum])
+        else:
+            sum_map[running_sum] = i
+
+    return max_length
+
+# Test example
+nums = [0, 1]
+result = find_max_length(nums)
+print(result)  # Output: 2
